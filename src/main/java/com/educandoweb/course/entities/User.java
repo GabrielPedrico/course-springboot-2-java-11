@@ -1,19 +1,24 @@
 package com.educandoweb.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 //Classe que implementa o serializable para que o objeto trafegue na rede, possa ser salvo em arquivos e assim por diante.
 
 // Anotation pra converter o objeto para o modelo relacional (Banco de dados),ele indica que esse objeto é uma entidade para o banco de dados
 @Entity
+@Table(name = "tb_user")
 public class User implements Serializable {
-
 	private static final long serialVersionUID = 1L;
+	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -21,6 +26,9 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<>();
 
 	// Como estou usando um framework, por padrão tenho que declarar o construtor da
 	// classe vazio
@@ -103,6 +111,10 @@ public class User implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
 }
