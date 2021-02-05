@@ -2,20 +2,32 @@ package com.educandoweb.course.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+//Classe que implementa o serializable para que o objeto trafegue na rede, possa ser salvo em arquivos e assim por diante.
+
+// Anotation pra converter o objeto para o modelo relacional (Banco de dados),ele indica que esse objeto é uma entidade para o banco de dados
+@Entity
 public class User implements Serializable {
-		
 
 	private static final long serialVersionUID = 1L;
-	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
-	
+
+	// Como estou usando um framework, por padrão tenho que declarar o construtor da
+	// classe vazio
 	public User() {
 	}
 
+	// Por conveniencia coloco um construtor por todos os atributos da classe
 	public User(Long id, String name, String email, String phone, String password) {
 		super();
 		this.id = id;
@@ -25,6 +37,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	// Proximo passo getters e setters
 	public Long getId() {
 		return id;
 	}
@@ -65,6 +78,8 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	// Em seguida a declaração dos hashcodes e equals (Por padrão vou colocar apenas
+	// o ID pois é o criterio que vou usar para comparar objetos)
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -89,6 +104,5 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }
