@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 //Classe que implementa o serializable para que o objeto trafegue na rede, possa ser salvo em arquivos e assim por diante.
 
 // Anotation pra converter o objeto para o modelo relacional (Banco de dados),ele indica que esse objeto é uma entidade para o banco de dados
@@ -27,6 +29,7 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 
