@@ -15,9 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_category")
-public class Category implements Serializable{
+public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,7 +28,6 @@ public class Category implements Serializable{
 	private Set<Product> products = new HashSet<>();
 	
 	public Category() {
-		
 	}
 
 	public Category(Long id, String name) {
@@ -53,6 +52,10 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
+	public Set<Product> getProducts() {
+		return products;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,9 +80,4 @@ public class Category implements Serializable{
 			return false;
 		return true;
 	}
-
-	public Set<Product> getProducts() {
-		return products;
-	}
-	
 }
